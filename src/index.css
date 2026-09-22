@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Hane";
+  src: url("/fonts/Hane-Medium.woff2") format("woff2"),
+    url("/fonts/Hane-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg-page: #F9F9F9;
+  --bg-card: #FFFFFF;
+  --color-brand-brown: #4A2711;
+  --color-brand-brown-dark: #361C0B;
+  --color-accent-yellow: #F5B056;
+  --text-heading: #111111;
+  --text-body: #444444;
+  
+  --border-radius-sm: 4px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 20px;
+  --border-radius-pill: 9999px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground-body font-body;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading text-foreground-heading font-semibold tracking-[-0.2px];
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 1rem);
+  }
+}
+
+.app-transition {
+  @apply transition-all duration-200 ease-in-out;
+}
+
+.tap-target {
+  @apply active:scale-[0.98] transition-transform duration-200;
+}
