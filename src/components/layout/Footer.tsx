@@ -28,9 +28,9 @@ export function Footer() {
           <div className="font-ui text-white/80 space-y-2 text-sm uppercase tracking-wide">
             <p>Polska 11 J</p>
             <p>Bukowiec (Podkarpackie)</p>
-            <a href="tel:[TELEFON]" className="block mt-4 hover:text-accent-gold transition-colors text-lg text-white">[TELEFON]</a>
-            <p className="text-xs mt-1 text-white/60">Czynne całą dobę</p>
-            <a href="mailto:[EMAIL]" className="block hover:text-accent-gold transition-colors mt-2">[EMAIL]</a>
+            <a href="tel:+48535165063" className="block mt-4 hover:text-accent-gold transition-colors text-lg text-white">535 165 063</a>
+            <p className="text-xs mt-1 text-white/60">Agnieszka Witkowska</p>
+            <a href="mailto:tabernus@o2.pl" className="block hover:text-accent-gold transition-colors mt-2">tabernus@o2.pl</a>
           </div>
         </div>
 

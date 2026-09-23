@@ -36,7 +36,7 @@ export function ContactForm() {
       const subject = encodeURIComponent(`Zapytanie o nocleg: ${data.name}`);
       const body = encodeURIComponent(buildEmailBody(data));
       
-      window.location.href = `mailto:[EMAIL]?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:tabernus@o2.pl?subject=${subject}&body=${body}`;
       
       toast.success('Dziękujemy za zapytanie! Otwieramy program pocztowy.', {
         style: {
@@ -74,30 +74,41 @@ export function ContactForm() {
               
               <div className="space-y-4 mt-auto">
                 <a
-                  href="tel:[TELEFON]"
+                  href="tel:+48535165063"
                   className="flex items-center gap-3 rounded-2xl border border-brand-brown/10 bg-background hover:bg-brand-brown/[0.03] transition-colors px-5 py-4"
                 >
                   <div className="w-10 h-10 rounded-full bg-background-card border border-brand-brown/10 flex items-center justify-center">
                     <Phone className="w-5 h-5 text-brand-brown" />
                   </div>
                   <div>
-                    <div className="text-lg font-ui tracking-wide text-foreground-heading">[TELEFON]</div>
-                    <div className="text-xs text-foreground-body/70">Najszybsza droga do szybkiej rezerwacji</div>
+                    <div className="text-lg font-ui tracking-wide text-foreground-heading">535 165 063</div>
+                    <div className="text-xs text-foreground-body/70">Agnieszka Witkowska</div>
                   </div>
                 </a>
 
                 <a
-                  href="mailto:[EMAIL]"
+                  href="mailto:tabernus@o2.pl"
                   className="flex items-start gap-4 p-4 rounded-xl border border-brand-green/10 hover:border-brand-green/30 hover:bg-brand-green/5 transition-all group"
                 >
                   <div className="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                     <Mail className="w-5 h-5 text-brand-green" />
                   </div>
                   <div>
-                    <div className="text-sm font-ui tracking-wide text-foreground-heading">[EMAIL]</div>
+                    <div className="text-sm font-ui tracking-wide text-foreground-heading">tabernus@o2.pl</div>
                     <div className="text-xs text-foreground-body/70">Możesz też wysłać wiadomość bez formularza</div>
                   </div>
                 </a>
+
+                <div className="mt-8 pt-6 border-t border-brand-brown/10">
+                  <div className="text-sm font-ui tracking-wide text-foreground-heading mb-2">Dane do wpłaty zadatku</div>
+                  <div className="text-xs text-foreground-body/80 leading-relaxed space-y-1">
+                    <p className="text-brand-wood font-medium">Rezerwacja następuje z opłaceniem zadatku 30%</p>
+                    <p className="font-semibold text-foreground-heading mt-3">Agnieszka Witkowska</p>
+                    <p>PKO BP oddział 1 Sanok</p>
+                    <p className="font-mono mt-1 text-foreground-heading font-medium tracking-wider">10 1020 2980 0000 2102 0107 9342</p>
+                    <p>SWIFT: BPKOPLPW</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
