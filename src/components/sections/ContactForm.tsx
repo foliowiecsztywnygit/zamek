@@ -102,11 +102,12 @@ export function ContactForm() {
                 <div className="mt-8 pt-6 border-t border-brand-brown/10">
                   <div className="text-sm font-ui tracking-wide text-foreground-heading mb-2">Dane do wpłaty zadatku</div>
                   <div className="text-xs text-foreground-body/80 leading-relaxed space-y-1">
-                    <p className="text-brand-wood font-medium">Rezerwacja następuje z opłaceniem zadatku 30%</p>
-                    <p className="font-semibold text-foreground-heading mt-3">Agnieszka Witkowska</p>
+                    <p className="text-brand-wood font-medium">Rezerwacja następuje po wpłaceniu zadatku</p>
+                    <p className="font-semibold text-foreground-heading mt-3">Gwalbert Witkowski</p>
                     <p>PKO BP oddział 1 Sanok</p>
                     <p className="font-mono mt-1 text-foreground-heading font-medium tracking-wider">10 1020 2980 0000 2102 0107 9342</p>
                     <p>SWIFT: BPKOPLPW</p>
+                    <p className="mt-2 text-brand-green font-medium">Na miejscu możliwa płatność gotówką oraz BLIKiem.</p>
                   </div>
                 </div>
               </div>

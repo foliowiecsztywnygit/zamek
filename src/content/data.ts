@@ -29,8 +29,8 @@ export const advantages = [
 
 export const rooms = [
   {
-    id: 'deluxe-bardzo-duze',
-    name: 'Pokój Dwuosobowy typu Deluxe',
+    id: 'dwuosobowy-1',
+    name: 'Pokój Dwuosobowy (nr 1)',
     description: 'Przestronny pokój dwuosobowy z bardzo dużym łóżkiem podwójnym. W pokoju znajduje się szafa, pościel oraz patio z widokiem na rzekę. Prywatna łazienka z prysznicem i suszarką do włosów. Z pokoju roztacza się widok na góry.',
     capacity: '2 osoby',
     amenities: ['Bardzo duże łóżko podwójne', 'Prywatna łazienka', 'Patio z widokiem', 'Szafa', 'Wi-Fi'],
@@ -51,8 +51,8 @@ export const rooms = [
     }
   },
   {
-    id: 'deluxe-duze',
-    name: 'Pokój Dwuosobowy typu Deluxe',
+    id: 'dwuosobowy-2',
+    name: 'Pokój Dwuosobowy (nr 2)',
     description: 'Komfortowy pokój dwuosobowy z dużym łóżkiem podwójnym. Wyposażony w szafę i pościel. Prywatna łazienka z prysznicem i suszarką do włosów. Patio z widokiem na rzekę.',
     capacity: '2 osoby',
     amenities: ['Duże łóżko podwójne', 'Prywatna łazienka', 'Patio z widokiem', 'Szafa', 'Wi-Fi'],
@@ -73,8 +73,52 @@ export const rooms = [
     }
   },
   {
+    id: 'dwuosobowy-3',
+    name: 'Pokój Dwuosobowy (nr 3)',
+    description: 'Przytulny pokój dwuosobowy w bieszczadzkim klimacie. Wyposażony w szafę, prywatną łazienkę z prysznicem i suszarką. Dostęp do wspólnej kuchni i ogrodu z rzeką.',
+    capacity: '2 osoby',
+    amenities: ['Duże łóżko podwójne', 'Prywatna łazienka', 'Wi-Fi', 'Szafa'],
+    image: '/images/rooms/salon-kanapa-widok1.jpeg',
+    images: [
+      '/images/rooms/salon-kanapa-widok1.jpeg',
+      '/images/rooms/kuchnia-zabudowa1.jpeg',
+      '/images/rooms/jadalnia-kuchnia-panorama.jpeg',
+    ],
+    details: {
+      bedrooms: [
+        '1 duże łóżko podwójne',
+      ],
+      livingRoom: 'Dostęp do salonu kominkowego z TV i grami',
+      kitchen: 'Wspólna kuchnia: zmywarka, lodówka, piekarnik, płyta kuchenna, stół jadalny',
+      bathrooms: 'Prywatna łazienka z prysznicem, suszarką do włosów, ręcznikami',
+      outdoor: 'Ogród z miejscem na piknik, grill, widok na rzekę'
+    }
+  },
+  {
+    id: 'dwuosobowy-4',
+    name: 'Pokój Dwuosobowy (nr 4)',
+    description: 'Jasny pokój dwuosobowy zapewniający ciszę i odpoczynek. Posiada prywatną łazienkę oraz dostęp do dużego ogrodu i salonu kominkowego. Idealny dla par.',
+    capacity: '2 osoby',
+    amenities: ['Duże łóżko podwójne', 'Prywatna łazienka', 'Wi-Fi', 'Szafa'],
+    image: '/images/rooms/pokoj-chesterfield-widok1.jpeg',
+    images: [
+      '/images/rooms/pokoj-chesterfield-widok1.jpeg',
+      '/images/rooms/pokoj-granatowy-lozko.jpeg',
+      '/images/rooms/salon-kanapa-kominek-panorama.jpeg',
+    ],
+    details: {
+      bedrooms: [
+        '1 duże łóżko podwójne',
+      ],
+      livingRoom: 'Dostęp do salonu kominkowego z TV i grami',
+      kitchen: 'Wspólna kuchnia: zmywarka, lodówka, piekarnik, płyta kuchenna, stół jadalny',
+      bathrooms: 'Prywatna łazienka z prysznicem, suszarką do włosów, ręcznikami',
+      outdoor: 'Ogród z miejscem na piknik, grill, widok na rzekę'
+    }
+  },
+  {
     id: 'jednoosobowy',
-    name: 'Mały pokój jednoosobowy',
+    name: 'Pokój Jednoosobowy',
     description: 'Przytulny pokój jednoosobowy z łóżkiem pojedynczym. Wyposażony w szafę i pościel. Prywatna łazienka z prysznicem. Idealny dla osób podróżujących solo, ceniących ciszę i kontakt z naturą.',
     capacity: '1 osoba',
     amenities: ['Łóżko pojedyncze', 'Prywatna łazienka', 'Szafa', 'Wi-Fi'],
@@ -88,32 +132,10 @@ export const rooms = [
       bedrooms: [
         '1 łóżko pojedyncze',
       ],
-      livingRoom: 'Widok na ogród i dziedziniec',
+      livingRoom: 'Dostęp do salonu kominkowego z TV i grami',
       kitchen: 'Wspólna kuchnia: zmywarka, lodówka, piekarnik, płyta kuchenna, stół jadalny',
       bathrooms: 'Prywatna łazienka z prysznicem, suszarką do włosów, ręcznikami',
       outdoor: 'Ogród, miejsce na piknik, grill'
-    }
-  },
-  {
-    id: 'willa',
-    name: 'Willa z 1 sypialnią',
-    description: 'Przestronna willa z jedną sypialnią, dużym salonem i pięknym ogrodem. Idealna dla par lub rodzin szukających prywatności i przestrzeni. Bezpośredni dostęp do ogrodu z widokiem na rzekę i góry.',
-    capacity: '2-4 osoby',
-    amenities: ['Sypialnia', 'Salon', 'Prywatna łazienka', 'Ogród', 'Wi-Fi'],
-    image: '/images/rooms/jadalnia-stol-okna-lukowe2.jpeg',
-    images: [
-      '/images/rooms/jadalnia-stol-okna-lukowe2.jpeg',
-      '/images/rooms/jadalnia-kuchnia-panorama.jpeg',
-      '/images/rooms/kuchnia-piekarnik-lodowka.jpeg',
-    ],
-    details: {
-      bedrooms: [
-        '1 sypialnia (łóżko podwójne)',
-      ],
-      livingRoom: 'Duży przestronny salon',
-      kitchen: 'Wspólna kuchnia: zmywarka, lodówka, piekarnik, płyta kuchenna, stół jadalny',
-      bathrooms: 'Prywatna łazienka z prysznicem, suszarką do włosów, ręcznikami',
-      outdoor: 'Piękny ogród, widok na rzekę i góry, taras'
     }
   },
 ];
@@ -232,7 +254,7 @@ export const faqData = [
   },
   {
     question: 'Czy akceptujecie płatność gotówką?',
-    answer: 'Nie, gotówka nie jest akceptowana. Prosimy o płatność przelewem lub kartą.',
+    answer: 'Tak, na miejscu akceptujemy płatność gotówką oraz BLIK. Zadatek realizowany jest przelewem.',
   },
   {
     question: 'Czy w obiekcie jest cisza nocna?',

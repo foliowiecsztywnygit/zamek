@@ -22,7 +22,7 @@ export function Location() {
           </div>
           <div className="lg:w-1/2 min-h-[400px] lg:min-h-full relative">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2596.0!2d22.2!3d49.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sBukowiec!5e0!3m2!1spl!2spl"
+              src="https://maps.google.com/maps?q=Bukowiec+11M,+38-610+Pola%C5%84czyk&t=&z=14&ie=UTF8&iwloc=&output=embed"
               className="absolute inset-0 w-full h-full"
               style={{ border: 0 }}
               allowFullScreen

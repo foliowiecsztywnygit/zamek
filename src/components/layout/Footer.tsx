@@ -50,7 +50,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/10 text-center font-ui text-white/50 text-xs tracking-widest uppercase">
         <p>&copy; {new Date().getFullYear()} ZAMEK BUKOWIEC. WSZELKIE PRAWA ZASTRZEŻONE.</p>
         <p className="mt-2">
-          Projekt i Realizacja: <a href="https://brosystems.pl" target="_blank" rel="noopener noreferrer" className="hover:text-accent-gold transition-colors">Krzysztof Żebrowski</a>
+          Projekt i Wykonanie: <a href="https://brosystems.pl" target="_blank" rel="noopener noreferrer" className="hover:text-accent-gold transition-colors">Krzysztof Żebrowski</a>
         </p>
       </div>
     </footer>

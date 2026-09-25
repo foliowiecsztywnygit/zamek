@@ -7,6 +7,7 @@ import { Location } from '../components/sections/Location';
 import { ContactForm } from '../components/sections/ContactForm';
 import { Faq } from '../components/sections/Faq';
 import { GoralskiDivider } from '../components/ui/Icons';
+import { SearchBar } from '../components/SearchBar';
 
 export default function Home() {
   return (
@@ -29,8 +30,9 @@ export default function Home() {
               "image": "https://[DOMENA]/images/hero/hero-zameczek-lato.jpeg",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Polska 11 J",
-                "addressLocality": "Bukowiec",
+                "streetAddress": "Bukowiec 11M",
+                "addressLocality": "Polańczyk",
+                "postalCode": "38-610",
                 "addressRegion": "Podkarpackie",
                 "addressCountry": "PL"
               },
@@ -42,6 +44,11 @@ export default function Home() {
       </Helmet>
 
       <Hero />
+      
+      <div className="container relative z-20 -mt-16 md:-mt-24 mb-16">
+        <SearchBar />
+      </div>
+
       <About />
       <GoralskiDivider />
       <RoomsSection />

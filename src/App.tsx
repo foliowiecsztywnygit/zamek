@@ -7,23 +7,31 @@ import ContactPage from './pages/ContactPage';
 import FaqPage from './pages/FaqPage';
 import BlogPage from './pages/BlogPage';
 import BlogPostPage from './pages/BlogPostPage';
+import BookingPage from './pages/BookingPage';
+import AdminPage from './pages/AdminPage';
 import ScrollToTop from './components/layout/ScrollToTop';
 
 function App() {
   return (
     <Router>
       <ScrollToTop />
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/pokoje" element={<DomkiPage />} />
-          <Route path="/galeria" element={<GalleryPage />} />
-          <Route path="/kontakt" element={<ContactPage />} />
-          <Route path="/faq" element={<FaqPage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog/:slug" element={<BlogPostPage />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="*" element={
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/pokoje" element={<DomkiPage />} />
+              <Route path="/galeria" element={<GalleryPage />} />
+              <Route path="/kontakt" element={<ContactPage />} />
+              <Route path="/faq" element={<FaqPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/blog/:slug" element={<BlogPostPage />} />
+              <Route path="/rezerwacja" element={<BookingPage />} />
+            </Routes>
+          </Layout>
+        } />
+      </Routes>
     </Router>
   );
 }

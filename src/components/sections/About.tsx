@@ -21,7 +21,7 @@ export function About() {
         <div className="w-24 h-px bg-accent-gold mx-auto mb-6" />
         <p className="text-foreground-body font-body text-lg leading-relaxed">
           Obiekt Zamek, usytuowany w miejscowości Bukowiec, oferuje ogród, bezpłatny prywatny parking oraz taras.
-          W obiekcie zapewniono wspólną kuchnię oraz bezpłatne Wi-Fi we wszystkich pomieszczeniach. We wszystkich pokojach znajduje się prywatna łazienka z prysznicem i suszarką do włosów.
+          W obiekcie zapewniono wspólną kuchnię, salon kominkowy z dużym telewizorem (Netflix, gry planszowe i PlayStation) oraz bezpłatne Wi-Fi we wszystkich pomieszczeniach. We wszystkich pokojach znajduje się prywatna łazienka z prysznicem i suszarką do włosów.
         </p>
       </FadeIn>
 
