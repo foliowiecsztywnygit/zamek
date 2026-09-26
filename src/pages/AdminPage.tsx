@@ -329,22 +329,27 @@ export default function AdminPage() {
   const [password, setPassword] = useState<string | null>(() => localStorage.getItem('admin_password'));
   const [cabins, setCabins] = useState<Cabin[]>([]);
   const [blocks, setBlocks] = useState<AvailabilityBlock[]>([]);
+  const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [activeCabin, setActiveCabin] = useState<string>('');
+  const [activeTab, setActiveTab] = useState<'calendar' | 'inquiries'>('calendar');
   const [loading, setLoading] = useState(true);
 
   const fetchData = useCallback(async (pw: string) => {
     setLoading(true);
     try {
-      const [cabinsRes, availRes] = await Promise.all([
+      const [cabinsRes, availRes, inqRes] = await Promise.all([
         fetch(`${API}/api/cabins`),
         fetch(`${API}/api/availability`),
+        fetch(`${API}/api/admin/inquiries`, { headers: { Authorization: pw } }),
       ]);
 
       const cabinsData = await cabinsRes.json();
       const availData = await availRes.json();
+      const inqData = inqRes.ok ? await inqRes.json() : [];
 
       setCabins(cabinsData);
       setBlocks(availData);
+      setInquiries(inqData);
 
       if (!activeCabin && cabinsData.length > 0) {
         setActiveCabin(cabinsData[0].id);
@@ -401,6 +406,23 @@ export default function AdminPage() {
     }
   };
 
+  const handleDeleteInquiry = async (inquiryId: number) => {
+    if (!password) return;
+    if (!confirm('Czy na pewno chcesz usunąć to zapytanie?')) return;
+    
+    try {
+      const res = await fetch(`${API}/api/admin/inquiries/${inquiryId}`, {
+        method: 'DELETE',
+        headers: { Authorization: password },
+      });
+      if (res.ok) {
+        fetchData(password);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   if (!password) {
     return <LoginScreen onLogin={handleLogin} />;
   }
@@ -426,10 +448,28 @@ export default function AdminPage() {
         {/* Tab navigation */}
         <div className="flex border-b border-brand-green/10 mb-8 gap-0">
           <button
-            className="flex items-center gap-2 px-6 py-3 font-ui text-xs uppercase tracking-widest transition-colors border-b-2 -mb-px border-brand-green text-brand-green"
+            onClick={() => setActiveTab('calendar')}
+            className={cn(
+              "flex items-center gap-2 px-6 py-3 font-ui text-xs uppercase tracking-widest transition-colors border-b-2 -mb-px",
+              activeTab === 'calendar'
+                ? "border-brand-green text-brand-green"
+                : "border-transparent text-foreground-body/50 hover:text-foreground-body"
+            )}
           >
             <Calendar className="w-4 h-4" />
             Kalendarz dostępności
+          </button>
+          <button
+            onClick={() => setActiveTab('inquiries')}
+            className={cn(
+              "flex items-center gap-2 px-6 py-3 font-ui text-xs uppercase tracking-widest transition-colors border-b-2 -mb-px",
+              activeTab === 'inquiries'
+                ? "border-brand-green text-brand-green"
+                : "border-transparent text-foreground-body/50 hover:text-foreground-body"
+            )}
+          >
+            <Inbox className="w-4 h-4" />
+            Zapytania
           </button>
         </div>
 
@@ -437,7 +477,7 @@ export default function AdminPage() {
           <div className="text-center py-20 text-foreground-body/50 font-ui uppercase tracking-widest text-sm">
             Ładowanie...
           </div>
-        ) : (
+        ) : activeTab === 'calendar' ? (
           <div>
             {/* Cabin selector */}
             <div className="flex flex-wrap gap-2 mb-6">
@@ -513,6 +553,78 @@ export default function AdminPage() {
                 </div>
               );
             })()}
+          </div>
+        ) : (
+          <div>
+            <h2 className="text-xl font-heading text-brand-green uppercase tracking-wide mb-6 border-b border-brand-green/10 pb-4">
+              Ostatnie zapytania
+            </h2>
+            {inquiries.length === 0 ? (
+              <p className="text-foreground-body/60 text-sm font-ui">Brak nowych zapytań.</p>
+            ) : (
+              <div className="grid grid-cols-1 gap-4">
+                {inquiries.map((inq) => (
+                  <div key={inq.id} className="bg-background-card border border-brand-green/10 p-6 flex flex-col md:flex-row md:items-start justify-between gap-6 shadow-sm">
+                    <div className="space-y-4 flex-1">
+                      <div>
+                        <div className="flex items-center gap-3 mb-1">
+                          <h3 className="font-heading text-lg text-brand-green">{inq.name}</h3>
+                          <span className="text-[10px] font-ui uppercase tracking-widest text-foreground-body/50 bg-background px-2 py-1 border border-brand-green/10">
+                            {format(parseISO(inq.createdAt), 'dd.MM.yyyy HH:mm')}
+                          </span>
+                        </div>
+                        <p className="text-sm text-foreground-body/80 font-ui">
+                          {inq.email} • {inq.phone}
+                        </p>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4 text-sm font-ui bg-background p-4 border border-brand-green/5">
+                        <div>
+                          <p className="text-[10px] uppercase tracking-widest text-foreground-body/50 mb-1">Wybrany pokój</p>
+                          <p className="font-medium text-foreground-heading">{inq.cabinName}</p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] uppercase tracking-widest text-foreground-body/50 mb-1">Termin</p>
+                          <p className="font-medium text-foreground-heading">
+                            {format(parseISO(inq.startDate), 'dd.MM')} - {format(parseISO(inq.endDate), 'dd.MM.yyyy')}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] uppercase tracking-widest text-foreground-body/50 mb-1">Goście</p>
+                          <p className="font-medium text-foreground-heading">Dorośli: {inq.adults} {inq.children > 0 && `• Dzieci: ${inq.children}`}</p>
+                        </div>
+                      </div>
+
+                      {inq.message && (
+                        <div>
+                          <p className="text-[10px] font-ui uppercase tracking-widest text-foreground-body/50 mb-1">Wiadomość od gościa</p>
+                          <p className="text-sm text-foreground-body/80 italic border-l-2 border-brand-green/30 pl-3 py-1">
+                            {inq.message}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="flex flex-row md:flex-col gap-2 shrink-0 border-t md:border-t-0 md:border-l border-brand-green/10 pt-4 md:pt-0 md:pl-4">
+                      <button 
+                        onClick={() => handleAddBlock(inq.cabinId, inq.startDate, inq.endDate)}
+                        className="flex-1 md:flex-none flex items-center justify-center gap-2 h-10 px-4 text-xs font-ui uppercase tracking-widest bg-brand-green text-white hover:bg-brand-green-light transition-colors"
+                      >
+                        <Lock className="w-3 h-3" />
+                        Zablokuj Termin
+                      </button>
+                      <button 
+                        onClick={() => handleDeleteInquiry(inq.id)}
+                        className="flex-1 md:flex-none flex items-center justify-center gap-2 h-10 px-4 text-xs font-ui uppercase tracking-widest border border-red-200 text-red-500 hover:bg-red-50 transition-colors"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                        Usuń Zapytanie
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -63,8 +63,7 @@ export default function BookingPage() {
         
         return areIntervalsOverlapping(
           { start, end },
-          { start: bStart, end: bEnd },
-          { inclusive: true }
+          { start: bStart, end: bEnd }
         );
       });
       
