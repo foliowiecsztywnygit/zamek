@@ -1,0 +1,15 @@
+node_modules
+server/node_modules
+dist
+.git
+.gitignore
+*.md
+.vscode
+.idea
+*.sqlite
+*.sqlite3
+server/database.sqlite
+server/database.sqlite-journal
+server/.env
+.env
+.env.*

@@ -5,6 +5,7 @@ import { SearchBar } from '../components/SearchBar';
 import { Section } from '../components/ui/Section';
 import { Button } from '../components/ui/Button';
 import { FadeIn } from '../components/ui/FadeIn';
+import { API_BASE } from '../lib/api';
 
 interface Cabin {
   id: string;
@@ -37,8 +38,8 @@ export default function BookingPage() {
 
   useEffect(() => {
     Promise.all([
-      fetch('http://localhost:3001/api/cabins').then(res => res.json()),
-      fetch('http://localhost:3001/api/availability').then(res => res.json())
+      fetch(`${API_BASE}/api/cabins`).then(res => res.json()),
+      fetch(`${API_BASE}/api/availability`).then(res => res.json())
     ]).then(([cabinsData, availabilityData]) => {
       setAllCabins(cabinsData);
       setAvailability(availabilityData);
@@ -84,7 +85,7 @@ export default function BookingPage() {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('http://localhost:3001/api/inquiries', {
+      const response = await fetch(`${API_BASE}/api/inquiries`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

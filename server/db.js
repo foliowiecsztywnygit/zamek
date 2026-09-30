@@ -3,7 +3,13 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const dbPath = path.join(__dirname, 'database.sqlite');
+
+// Use DATA_DIR env var for persistent storage in Docker, default to current directory
+const dataDir = process.env.DATA_DIR || __dirname;
+const dbPath = path.join(dataDir, 'database.sqlite');
+
+console.log(`Database path: ${dbPath}`);
+
 const db = new Database(dbPath);
 
 // Initialize DB schema

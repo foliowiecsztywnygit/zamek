@@ -1,17 +1,22 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { Resend } from 'resend';
 import db from './db.js';
 
 dotenv.config();
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(cors());
 app.use(express.json());
+
+// ─── API Routes ────────────────────────────────────────────────
 
 // Get all cabins
 app.get('/api/cabins', (req, res) => {
@@ -154,6 +159,16 @@ app.delete('/api/admin/inquiries/:id', (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`Backend server running on http://localhost:${port}`);
+// ─── Static Files (Production) ─────────────────────────────────
+// Serve the Vite build output from ../dist
+const distPath = path.join(__dirname, '..', 'dist');
+app.use(express.static(distPath));
+
+// SPA fallback: any non-API route serves index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
+});
+
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on http://0.0.0.0:${port}`);
 });

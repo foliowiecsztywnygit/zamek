@@ -17,8 +17,9 @@ import {
 import { pl } from 'date-fns/locale';
 import { ChevronLeft, ChevronRight, Lock, LogOut, Calendar, Inbox, Trash2, Plus, X, Shield } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { API_BASE } from '../lib/api';
 
-const API = 'http://localhost:3001';
+const API = API_BASE;
 
 interface Cabin {
   id: string;
