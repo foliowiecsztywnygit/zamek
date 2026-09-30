@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X, CalendarDays } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { rooms } from '@/content/data';
 
@@ -32,6 +32,8 @@ export function Navbar() {
     { name: 'Kontakt', href: '/kontakt' },
   ];
 
+  const isBookingPage = location.pathname === '/rezerwacja';
+
   return (
     <header
       className={cn(
@@ -57,7 +59,7 @@ export function Navbar() {
           <div className="hidden md:flex justify-center">
             <nav
               className={cn(
-                'border-2 px-8 py-3 transition-colors duration-300',
+                'border-2 px-8 py-3 transition-colors duration-300 flex items-center gap-0',
                 isScrolled ? 'border-brand-green/20 bg-transparent' : 'bg-black/20 border-white/20 backdrop-blur-sm'
               )}
             >
@@ -115,6 +117,22 @@ export function Navbar() {
                   );
                 })}
               </ul>
+
+              {/* Booking button in navbar */}
+              {!isBookingPage && (
+                <Link
+                  to="/rezerwacja"
+                  className={cn(
+                    "ml-8 inline-flex items-center gap-2 px-5 py-2 text-xs font-ui uppercase tracking-[0.18em] transition-colors",
+                    isScrolled 
+                      ? "bg-brand-green text-white hover:bg-brand-green-light" 
+                      : "bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm border border-white/30"
+                  )}
+                >
+                  <CalendarDays className="w-3.5 h-3.5" />
+                  Rezerwuj
+                </Link>
+              )}
             </nav>
           </div>
 
@@ -138,6 +156,16 @@ export function Navbar() {
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b-2 border-brand-green/10">
           <nav className="container py-6 flex flex-col gap-6">
+            {/* Mobile booking CTA - prominent at top */}
+            <Link
+              to="/rezerwacja"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center justify-center gap-2 w-full py-4 bg-brand-green text-white font-ui uppercase tracking-[0.18em] text-sm hover:bg-brand-green-light transition-colors"
+            >
+              <CalendarDays className="w-4 h-4" />
+              Sprawdź dostępność
+            </Link>
+
             <ul className="flex flex-col gap-4">
               {navLinks.map((link) => {
                 if (link.name !== 'Pokoje') {

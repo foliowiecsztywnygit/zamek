@@ -10,7 +10,7 @@ dotenv.config();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(cors());

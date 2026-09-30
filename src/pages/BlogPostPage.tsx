@@ -6,6 +6,7 @@ import { Section } from '../components/ui/Section';
 import { blogPosts } from '../content/blog';
 import { FadeIn } from '../components/ui/FadeIn';
 import { AppImage } from '../components/ui/AppImage';
+import { BookingCTA } from '../components/BookingCTA';
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -64,6 +65,9 @@ export default function BlogPostPage() {
               {post.content}
             </ReactMarkdown>
           </FadeIn>
+
+          {/* Booking CTA at bottom of blog post */}
+          <BookingCTA variant="banner" className="mb-12" />
         </div>
       </Section>
     </div>

@@ -4,7 +4,7 @@ import { About } from '../components/sections/About';
 import { RoomsSection } from '../components/sections/RoomsSection';
 import { PromoCards } from '../components/sections/PromoCards';
 import { Location } from '../components/sections/Location';
-import { ContactForm } from '../components/sections/ContactForm';
+import { BookingCTA } from '../components/BookingCTA';
 import { Faq } from '../components/sections/Faq';
 import { GoralskiDivider } from '../components/ui/Icons';
 import { SearchBar } from '../components/SearchBar';
@@ -50,15 +50,18 @@ export default function Home() {
       </div>
 
       <About />
+      <BookingCTA variant="compact" />
       <GoralskiDivider />
       <RoomsSection />
       <GoralskiDivider />
       <PromoCards />
+      <BookingCTA variant="compact" />
       <GoralskiDivider />
       <Location />
       <GoralskiDivider />
-      <ContactForm />
+      <BookingCTA variant="full" />
       <Faq />
+      <BookingCTA variant="compact" className="pb-16" />
     </>
   );
 }
