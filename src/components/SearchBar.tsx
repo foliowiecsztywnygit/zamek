@@ -74,7 +74,7 @@ export function SearchBar() {
   );
 
   return (
-    <div className="relative flex justify-center w-full my-12" ref={ref}>
+    <div className="relative flex justify-center w-full" ref={ref}>
       <div className="flex flex-col md:flex-row shadow-lg w-full max-w-4xl bg-white">
         
         <div className="flex flex-col md:flex-row flex-1 relative">

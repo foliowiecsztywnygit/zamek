@@ -45,7 +45,7 @@ export default function Home() {
 
       <Hero />
       
-      <div className="container relative z-20 -mt-16 md:-mt-24 mb-16">
+      <div className="container relative z-20 -mt-24 md:-mt-32 mb-16">
         <SearchBar />
       </div>
 
