@@ -10,7 +10,8 @@ import { ArrowRight } from 'lucide-react';
 export function SearchBar() {
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [endDate, setEndDate] = useState<Date>(addDays(new Date(), 1));
-  const [showCalendar, setShowCalendar] = useState<'start' | 'end' | null>(null);
+  const [showCalendar, setShowCalendar] = useState<boolean>(false);
+  const [selectionStep, setSelectionStep] = useState<'start' | 'end'>('start');
   
   const ref = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export function SearchBar() {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
-        setShowCalendar(null);
+        setShowCalendar(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -26,20 +27,18 @@ export function SearchBar() {
   }, []);
 
   const handleDateChange = (date: Date) => {
-    if (showCalendar === 'start') {
+    if (selectionStep === 'start') {
       setStartDate(date);
-      if (isBefore(endDate, date) || endDate.getTime() === date.getTime()) {
-        setEndDate(addDays(date, 1));
-      }
-      setShowCalendar('end');
-    } else if (showCalendar === 'end') {
+      setEndDate(addDays(date, 1));
+      setSelectionStep('end');
+    } else {
       if (isBefore(date, startDate) || date.getTime() === startDate.getTime()) {
         setStartDate(date);
         setEndDate(addDays(date, 1));
       } else {
         setEndDate(date);
+        setShowCalendar(false);
       }
-      setShowCalendar(null);
     }
   };
 
@@ -80,8 +79,11 @@ export function SearchBar() {
         <div className="flex flex-col md:flex-row flex-1 relative">
           <DateDisplay 
             date={startDate} 
-            onClick={() => setShowCalendar(showCalendar === 'start' ? null : 'start')}
-            isActive={showCalendar === 'start'}
+            onClick={() => {
+              if (showCalendar) setShowCalendar(false);
+              else { setShowCalendar(true); setSelectionStep('start'); }
+            }}
+            isActive={showCalendar && selectionStep === 'start'}
           />
           
           <div className="hidden md:flex items-center justify-center bg-white px-2 z-10 text-gray-300">
@@ -90,8 +92,11 @@ export function SearchBar() {
           
           <DateDisplay 
             date={endDate} 
-            onClick={() => setShowCalendar(showCalendar === 'end' ? null : 'end')}
-            isActive={showCalendar === 'end'}
+            onClick={() => {
+              if (showCalendar) setShowCalendar(false);
+              else { setShowCalendar(true); setSelectionStep('start'); }
+            }}
+            isActive={showCalendar && selectionStep === 'end'}
           />
         </div>
 

@@ -46,7 +46,8 @@ export default function BookingPage() {
   const [endDate, setEndDate] = useState<Date>(
     endParam ? parseISO(endParam) : addDays(new Date(), 1)
   );
-  const [showCalendar, setShowCalendar] = useState<'start' | 'end' | null>(null);
+  const [showCalendar, setShowCalendar] = useState<boolean>(false);
+  const [selectionStep, setSelectionStep] = useState<'start' | 'end'>('start');
   const calendarRef = useRef<HTMLDivElement>(null);
 
   // Form
@@ -58,7 +59,7 @@ export default function BookingPage() {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (calendarRef.current && !calendarRef.current.contains(event.target as Node)) {
-        setShowCalendar(null);
+        setShowCalendar(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -110,20 +111,18 @@ export default function BookingPage() {
   }, [startParam, endParam, allCabins, availability, dataLoaded]);
 
   const handleDateChange = (date: Date) => {
-    if (showCalendar === 'start') {
+    if (selectionStep === 'start') {
       setStartDate(date);
-      if (isBefore(endDate, date) || endDate.getTime() === date.getTime()) {
-        setEndDate(addDays(date, 1));
-      }
-      setShowCalendar('end');
-    } else if (showCalendar === 'end') {
+      setEndDate(addDays(date, 1));
+      setSelectionStep('end');
+    } else {
       if (isBefore(date, startDate) || date.getTime() === startDate.getTime()) {
         setStartDate(date);
         setEndDate(addDays(date, 1));
       } else {
         setEndDate(date);
+        setShowCalendar(false);
       }
-      setShowCalendar(null);
     }
   };
 
@@ -192,10 +191,13 @@ export default function BookingPage() {
               {/* Start date */}
               <button
                 type="button"
-                onClick={() => setShowCalendar(showCalendar === 'start' ? null : 'start')}
+                onClick={() => {
+                  if (showCalendar) setShowCalendar(false);
+                  else { setShowCalendar(true); setSelectionStep('start'); }
+                }}
                 className={cn(
                   "flex items-center gap-4 py-5 px-6 md:px-10 transition-colors flex-1 text-left",
-                  showCalendar === 'start' ? 'bg-brand-green/5' : 'hover:bg-gray-50'
+                  showCalendar && selectionStep === 'start' ? 'bg-brand-green/5' : 'hover:bg-gray-50'
                 )}
               >
                 <CalendarDays className="w-5 h-5 text-brand-green shrink-0" />
@@ -222,10 +224,13 @@ export default function BookingPage() {
               {/* End date */}
               <button
                 type="button"
-                onClick={() => setShowCalendar(showCalendar === 'end' ? null : 'end')}
+                onClick={() => {
+                  if (showCalendar) setShowCalendar(false);
+                  else { setShowCalendar(true); setSelectionStep('start'); }
+                }}
                 className={cn(
                   "flex items-center gap-4 py-5 px-6 md:px-10 transition-colors flex-1 text-left border-t md:border-t-0 md:border-l border-gray-100",
-                  showCalendar === 'end' ? 'bg-brand-green/5' : 'hover:bg-gray-50'
+                  showCalendar && selectionStep === 'end' ? 'bg-brand-green/5' : 'hover:bg-gray-50'
                 )}
               >
                 <CalendarDays className="w-5 h-5 text-brand-green shrink-0" />
